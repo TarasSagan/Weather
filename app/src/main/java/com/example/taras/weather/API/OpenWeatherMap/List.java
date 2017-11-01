@@ -6,59 +6,37 @@ import com.google.gson.annotations.SerializedName;
 
 public class List {
 
-    @SerializedName("coord")
-    @Expose
-    private Coord coord;
-    @SerializedName("sys")
-    @Expose
-    private Sys sys;
-    @SerializedName("weather")
-    @Expose
-    private java.util.List<Weather> weather = null;
-    @SerializedName("main")
-    @Expose
-    private Main main;
-    @SerializedName("visibility")
-    @Expose
-    private long visibility;
-    @SerializedName("wind")
-    @Expose
-    private Wind wind;
-    @SerializedName("clouds")
-    @Expose
-    private Clouds clouds;
     @SerializedName("dt")
     @Expose
     private long dt;
-    @SerializedName("id")
+    @SerializedName("main")
     @Expose
-    private long id;
-    @SerializedName("name")
+    private Main main;
+    @SerializedName("weather")
     @Expose
-    private String name;
+    private java.util.List<Weather> weather = null;
+    @SerializedName("clouds")
+    @Expose
+    private Clouds clouds;
+    @SerializedName("wind")
+    @Expose
+    private Wind wind;
+    @SerializedName("snow")
+    @Expose
+    private Snow snow;
+    @SerializedName("sys")
+    @Expose
+    private Sys sys;
+    @SerializedName("dt_txt")
+    @Expose
+    private String dtTxt;
 
-    public Coord getCoord() {
-        return coord;
+    public long getDt() {
+        return dt;
     }
 
-    public void setCoord(Coord coord) {
-        this.coord = coord;
-    }
-
-    public Sys getSys() {
-        return sys;
-    }
-
-    public void setSys(Sys sys) {
-        this.sys = sys;
-    }
-
-    public java.util.List<Weather> getWeather() {
-        return weather;
-    }
-
-    public void setWeather(java.util.List<Weather> weather) {
-        this.weather = weather;
+    public void setDt(long dt) {
+        this.dt = dt;
     }
 
     public Main getMain() {
@@ -69,20 +47,12 @@ public class List {
         this.main = main;
     }
 
-    public long getVisibility() {
-        return visibility;
+    public java.util.List<Weather> getWeather() {
+        return weather;
     }
 
-    public void setVisibility(long visibility) {
-        this.visibility = visibility;
-    }
-
-    public Wind getWind() {
-        return wind;
-    }
-
-    public void setWind(Wind wind) {
-        this.wind = wind;
+    public void setWeather(java.util.List<Weather> weather) {
+        this.weather = weather;
     }
 
     public Clouds getClouds() {
@@ -93,28 +63,36 @@ public class List {
         this.clouds = clouds;
     }
 
-    public long getDt() {
-        return dt;
+    public Wind getWind() {
+        return wind;
     }
 
-    public void setDt(long dt) {
-        this.dt = dt;
+    public void setWind(Wind wind) {
+        this.wind = wind;
     }
 
-    public long getId() {
-        return id;
+    public Snow getSnow() {
+        return snow;
     }
 
-    public void setId(long id) {
-        this.id = id;
+    public void setSnow(Snow snow) {
+        this.snow = snow;
     }
 
-    public String getName() {
-        return name;
+    public Sys getSys() {
+        return sys;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setSys(Sys sys) {
+        this.sys = sys;
+    }
+
+    public String getDtTxt() {
+        return dtTxt;
+    }
+
+    public void setDtTxt(String dtTxt) {
+        this.dtTxt = dtTxt;
     }
 
 }

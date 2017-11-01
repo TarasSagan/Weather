@@ -14,8 +14,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import com.example.taras.weather.API.OpenWeatherMap.List;
-import com.example.taras.weather.API.OpenWeatherMap.Main;
+
 import com.example.taras.weather.API.OpenWeatherMap.OWMResponse;
 import com.example.taras.weather.API.OpenWeatherMap.OpenWeatherMapAPI;
 
@@ -113,23 +112,24 @@ public class MainActivity extends AppCompatActivity
     }
 
     private void init() {
-        String API_key = "6e104a1a0c242bb277980d2e9ecceeae";
+        String API_key = "caf674814c89747f40b8870b3091b074";
         Retrofit retrofit = new Retrofit.Builder()
                 .addConverterFactory(GsonConverterFactory.create())
-                .baseUrl("http://api.openweathermap.org/")
+                .baseUrl("http://api.openweathermap.org")
                 .build();
         OpenWeatherMapAPI openWeatherMapAPI = retrofit.create(OpenWeatherMapAPI.class);
-        Call<OWMResponse> call = openWeatherMapAPI.getWeather("703448,524894,536203","metric", API_key);
-        call.enqueue(new Callback<OWMResponse>() {
+        Call<OWMResponse>  call = openWeatherMapAPI.getWeather("703448", 14,"metric","ru", API_key);
+        call.enqueue(new Callback<OWMResponse> () {
             @Override
-            public void onResponse(Call<OWMResponse> call, Response<OWMResponse> response) {
+            public void onResponse(Call<OWMResponse>  call, Response<OWMResponse>  response) {
                 if (response.isSuccessful()){
-                    Log.d("TAG", "Удачно");
+                  Controller.addDataToDB(getApplicationContext(), Controller.responseToItemForecast(response.body()));
+                    Log.d("TAG", "Пробую добавить в базу");
                 }else Log.d("TAG", "Не удачный response");
             }
 
             @Override
-            public void onFailure(Call<OWMResponse> call, Throwable t) {
+            public void onFailure(Call<OWMResponse>  call, Throwable t) {
                 Log.d("TAG", "Не удачно " + t.getMessage());
             }
         });

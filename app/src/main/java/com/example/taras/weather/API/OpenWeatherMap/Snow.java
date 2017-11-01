@@ -4,18 +4,18 @@ package com.example.taras.weather.API.OpenWeatherMap;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class Sys {
+public class Snow {
 
-    @SerializedName("pod")
+    @SerializedName("3h")
     @Expose
-    private String pod;
+    private double _3h;
 
-    public String getPod() {
-        return pod;
+    public double get3h() {
+        return _3h;
     }
 
-    public void setPod(String pod) {
-        this.pod = pod;
+    public void set3h(double _3h) {
+        this._3h = _3h;
     }
 
 }

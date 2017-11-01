@@ -9,33 +9,74 @@ public class Main {
     @SerializedName("temp")
     @Expose
     private double temp;
-    @SerializedName("pressure")
-    @Expose
-    private long pressure;
-    @SerializedName("humidity")
-    @Expose
-    private long humidity;
     @SerializedName("temp_min")
     @Expose
     private double tempMin;
     @SerializedName("temp_max")
     @Expose
     private double tempMax;
+    @SerializedName("pressure")
+    @Expose
+    private double pressure;
+    @SerializedName("sea_level")
+    @Expose
+    private double seaLevel;
+    @SerializedName("grnd_level")
+    @Expose
+    private double grndLevel;
+    @SerializedName("humidity")
+    @Expose
+    private long humidity;
+    @SerializedName("temp_kf")
+    @Expose
+    private double tempKf;
 
     public double getTemp() {
         return temp;
     }
 
-    public void setTemp(long temp) {
+    public void setTemp(double temp) {
         this.temp = temp;
     }
 
-    public long getPressure() {
+    public double getTempMin() {
+        return tempMin;
+    }
+
+    public void setTempMin(double tempMin) {
+        this.tempMin = tempMin;
+    }
+
+    public double getTempMax() {
+        return tempMax;
+    }
+
+    public void setTempMax(double tempMax) {
+        this.tempMax = tempMax;
+    }
+
+    public double getPressure() {
         return pressure;
     }
 
-    public void setPressure(long pressure) {
+    public void setPressure(double pressure) {
         this.pressure = pressure;
+    }
+
+    public double getSeaLevel() {
+        return seaLevel;
+    }
+
+    public void setSeaLevel(double seaLevel) {
+        this.seaLevel = seaLevel;
+    }
+
+    public double getGrndLevel() {
+        return grndLevel;
+    }
+
+    public void setGrndLevel(double grndLevel) {
+        this.grndLevel = grndLevel;
     }
 
     public long getHumidity() {
@@ -46,20 +87,12 @@ public class Main {
         this.humidity = humidity;
     }
 
-    public double getTempMin() {
-        return tempMin;
+    public double getTempKf() {
+        return tempKf;
     }
 
-    public void setTempMin(long tempMin) {
-        this.tempMin = tempMin;
-    }
-
-    public double getTempMax() {
-        return tempMax;
-    }
-
-    public void setTempMax(long tempMax) {
-        this.tempMax = tempMax;
+    public void setTempKf(double tempKf) {
+        this.tempKf = tempKf;
     }
 
 }
