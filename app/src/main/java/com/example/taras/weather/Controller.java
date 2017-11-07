@@ -8,20 +8,70 @@ import android.database.sqlite.SQLiteDatabase;
 import com.example.taras.weather.API.OpenWeatherMap.OWMResponse;
 import com.example.taras.weather.DB.DBHelper;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
-
-/**
- * Created by Taras on 28.10.2017.
- */
+import java.util.Map;
 
 public  class  Controller {
 
+     static Map<String, ItemForecast> getTodayForecast(Context context){
+         Date date = new Date();
+         long todayDate = date.getTime();
+         Map<String, ItemForecast> map = new HashMap<>();
+         DBHelper dbHelper = new DBHelper(context);
+         SQLiteDatabase database= dbHelper.getWritableDatabase();
+         Cursor cursor  = database.query("OpenWeatherMapTable", null,
+                 "date >= ?",  new String[]{Long.toString(todayDate)}, null, null, "city_id");
+         if (cursor.moveToFirst()){
+             int idColIndex = cursor.getColumnIndex("id");
+             int lastupdateColIndex = cursor.getColumnIndex("lastupdate");
+             int cityNameColIndex = cursor.getColumnIndex("city_name");
+             int dateColIndex = cursor.getColumnIndex("date");
+             int cityIdColIndex = cursor.getColumnIndex("city_id");
+             int temperatureColIndex = cursor.getColumnIndex("temperature");
+             int descriptionColIndex = cursor.getColumnIndex("description");
+             int humidityColIndex = cursor.getColumnIndex("humidity");
+             int pressureColIndex = cursor.getColumnIndex("pressure");
+             int windSpeedColIndex = cursor.getColumnIndex("wind_speed");
+             int windDirectionColIndex = cursor.getColumnIndex("wind_direction");
+             int cloudsColIndex = cursor.getColumnIndex("clouds");
+             do {
+                 int idDB = cursor.getInt(idColIndex);
+                 long lastUpdateDB = cursor.getLong(lastupdateColIndex);
+                 String cityNameDB = cursor.getString(cityNameColIndex);
+                 long cityIdDB = cursor.getLong(cityIdColIndex);
+                 long forecastDateDB = cursor.getLong(dateColIndex);
+                 double temperatureDB = cursor.getDouble(temperatureColIndex);
+                 String descriptionDB = cursor.getString(descriptionColIndex);
+                 long humidityDB = cursor.getLong(humidityColIndex);
+                 double pressureDB = cursor.getDouble(pressureColIndex);
+                 double windSpeedDB = cursor.getDouble(windSpeedColIndex);
+                 double windDirectionDB = cursor.getDouble(windDirectionColIndex);
+                 long cloudsDB = cursor.getLong(cloudsColIndex);
+                 if(map.containsKey(cityNameDB)){
+                     if(forecastDateDB <= map.get(cityNameDB).getForecastDate()){
+                         map.put(cityNameDB, new ItemForecast(idDB, lastUpdateDB, cityNameDB, cityIdDB,
+                                 forecastDateDB, temperatureDB, descriptionDB, humidityDB, pressureDB,
+                                 windSpeedDB, windDirectionDB, cloudsDB));
+                     }
+                 } else map.put(cityNameDB, new ItemForecast(idDB, lastUpdateDB, cityNameDB, cityIdDB,
+                         forecastDateDB, temperatureDB, descriptionDB, humidityDB, pressureDB,
+                         windSpeedDB, windDirectionDB, cloudsDB));
+             }while (cursor.moveToNext());
+         }cursor.close();
+         database.close();
+         return map;
+     }
+
      static List<ItemForecast> responseToItemForecast(OWMResponse owmResponse){
-         List<ItemForecast> list = new ArrayList<ItemForecast>();
+         Date date = new Date();
+         long todayDate = date.getTime();
+         List<ItemForecast> list = new ArrayList<>();
          for(int i=0; i < owmResponse.getList().size(); i++){
              list.add(new ItemForecast(
                      0,
-                     321,
+                     todayDate,
                      owmResponse.getCity().getName().toString(),
                      owmResponse.getCity().getId(),
                      owmResponse.getList().get(i).getDt(),
@@ -37,7 +87,7 @@ public  class  Controller {
          return list;
      }
 
-    static void addDataToDB(Context context, List<ItemForecast> itemForecasts){
+    static void addUpdateData(Context context, List<ItemForecast> itemForecasts){
         DBHelper dbHelper = new DBHelper(context);
         SQLiteDatabase database= dbHelper.getWritableDatabase();
         Cursor cursor  = database.query("OpenWeatherMapTable", null,
@@ -51,7 +101,7 @@ public  class  Controller {
                     contentValues.put("lastupdate", itemForecasts.get(i).getLastUpdate());
                     contentValues.put("city_name", itemForecasts.get(i).getCityName());
                     contentValues.put("city_id ", itemForecasts.get(i).getCityID());
-                    contentValues.put("date", itemForecasts.get(i).getForecastDate());
+                    contentValues.put("date", itemForecasts.get(i).getForecastDate() * 1000);
                     contentValues.put("temperature", itemForecasts.get(i).getTemperature());
                     contentValues.put("description", itemForecasts.get(i).getDescription());
                     contentValues.put("humidity", itemForecasts.get(i).getHumidity());
@@ -69,12 +119,12 @@ public  class  Controller {
         }else Controller.updateDataDB(context, itemForecasts);
     }
     static void updateDataDB(Context context, List<ItemForecast> list){
-        String[] tmpID = new String[list.size()];
+        String[] tmpID = new String[list.size() + 10];
         int a = 0;
         DBHelper dbHelper = new DBHelper(context);
         SQLiteDatabase database= dbHelper.getWritableDatabase();
         Cursor cursor  = database.query("OpenWeatherMapTable", null,
-                "city_name = ? ", new String[]{list.get(1).getCityName()}, null, null, null);
+                "city_name = ? ", new String[]{list.get(0).getCityName()}, null, null, null);
         if (cursor.moveToFirst()){
             int idColIndex = cursor.getColumnIndex("id");
             do {
@@ -106,5 +156,4 @@ public  class  Controller {
         }
         database.close();
     }
-
 }

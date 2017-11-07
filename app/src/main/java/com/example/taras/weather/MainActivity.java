@@ -1,5 +1,6 @@
 package com.example.taras.weather;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -13,11 +14,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-
-
 import com.example.taras.weather.API.OpenWeatherMap.OWMResponse;
 import com.example.taras.weather.API.OpenWeatherMap.OpenWeatherMapAPI;
-
+import java.util.Map;
+import java.util.Set;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -26,6 +26,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,7 +52,9 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-        init();
+//        init();
+
+        Controller.getTodayForecast(getApplicationContext());
     }
 
     @Override
@@ -118,12 +121,12 @@ public class MainActivity extends AppCompatActivity
                 .baseUrl("http://api.openweathermap.org")
                 .build();
         OpenWeatherMapAPI openWeatherMapAPI = retrofit.create(OpenWeatherMapAPI.class);
-        Call<OWMResponse>  call = openWeatherMapAPI.getWeather("703448", 14,"metric","ru", API_key);
+        Call<OWMResponse>  call = openWeatherMapAPI.getWeather("703448","metric","ru", API_key);
         call.enqueue(new Callback<OWMResponse> () {
             @Override
             public void onResponse(Call<OWMResponse>  call, Response<OWMResponse>  response) {
                 if (response.isSuccessful()){
-                  Controller.addDataToDB(getApplicationContext(), Controller.responseToItemForecast(response.body()));
+                  Controller.addUpdateData(getApplicationContext(), Controller.responseToItemForecast(response.body()));
                     Log.d("TAG", "Пробую добавить в базу");
                 }else Log.d("TAG", "Не удачный response");
             }
@@ -138,4 +141,22 @@ public class MainActivity extends AppCompatActivity
     }
 
 
+   void saveSattings(Map<String, String> map){
+        SharedPreferences sharedPreferences= getSharedPreferences("SettingsWeather", MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        Set<String> keys = map.keySet();
+        for(String k : keys) {
+            editor.putString(k, map.get(k));
+            Log.d("TAG", k + map.get(k));
+        }
+        editor.commit();
+    }
+    String getSettings(String key){
+        SharedPreferences  sharedPreferences = getSharedPreferences("SettingsWeather", MODE_PRIVATE);
+        String tmp = sharedPreferences.getString(key, "");
+        return tmp;
+    }
+    void removeSettings(Map<String, String> map){
+        SharedPreferences sharedPreferences = getSharedPreferences("SettingsWeather", MODE_PRIVATE);
+    }
 }
