@@ -5,7 +5,7 @@ package com.example.taras.weather;
  */
 
 public class ItemForecast {
-    private int id;
+    private long id;
     private long lastUpdate;
     private String cityName;
     private long cityID;
@@ -18,7 +18,7 @@ public class ItemForecast {
     private double windDirection;
     private long clouds ;
 
-    public ItemForecast(int id, long lastUpdate, String cityName, long cityID, long forecastDate,
+    public ItemForecast(long id, long lastUpdate, String cityName, long cityID, long forecastDate,
                         double temperature, String description, long humidity, double pressure,
                         double windSpeed, double windDirection, long clouds) {
         this.id = id;
@@ -35,11 +35,11 @@ public class ItemForecast {
         this.clouds = clouds;
     }
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 
