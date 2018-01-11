@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="10dp"
+    android:gravity="top|center"
+    android:background="@color/colorBackground"
+    android:orientation="horizontal">
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="360dp"
+        android:layout_height="match_parent"
+        android:background="@drawable/item">
+
+        <TextView
+            android:id="@+id/TFCityname"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/text_margin"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:text="Киев"
+            android:textAppearance="?attr/textAppearanceListItem"
+            android:textColor="#ffffff"
+            android:textSize="20sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/TFDescription"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/text_margin"
+            android:layout_marginEnd="8dp"
+            android:layout_marginTop="1dp"
+            android:text="Description"
+            android:textAlignment="textEnd"
+            android:textAppearance="?attr/textAppearanceListItem"
+            android:textColor="#ffffff"
+            android:textSize="13sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/TFTemperature" />
+
+        <TextView
+            android:id="@+id/TFTemperature"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="50dp"
+            android:layout_marginTop="10dp"
+            android:padding="1dp"
+            android:text="20"
+            android:textColor="#ffffff"
+            android:textSize="25sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/TFTimeForecast"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:text="at 15.00"
+            android:textColor="#ffffff"
+            android:textSize="10sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/TFCityname" />
+
+        <TextView
+            android:id="@+id/TFHumidity"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="80dp"
+            android:layout_marginTop="8dp"
+            android:text="humidity"
+            android:textColor="#ffffff"
+            android:textSize="13sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/TFDescription" />
+
+        <TextView
+            android:id="@+id/TFPressure"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="80dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginTop="8dp"
+            android:text="pressure"
+            android:textColor="#ffffff"
+            android:textSize="13sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/TFHumidity" />
+
+        <TextView
+            android:id="@+id/TFWindSpeed"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="80dp"
+            android:layout_marginTop="8dp"
+            android:text="windSpeed"
+            android:textColor="#ffffff"
+            android:textSize="13sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/TFPressure" />
+
+        <TextView
+            android:id="@+id/TFClouds"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="80dp"
+            android:layout_marginTop="8dp"
+            android:text="clouds"
+            android:textColor="#ffffff"
+            android:textSize="13sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/TFWindSpeed" />
+
+        <TextView
+            android:id="@+id/TFLastUpdate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="6dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginTop="10dp"
+            android:text="Update"
+            android:textColor="#ffffff"
+            android:textSize="8sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/TFClouds" />
+
+        <TextView
+            android:id="@+id/textView9"
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="80dp"
+            android:text="Humidity:"
+            android:textAlignment="textEnd"
+            android:textColor="#ffffff"
+            android:textSize="13sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/TFHumidity" />
+
+        <TextView
+            android:id="@+id/textView10"
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="80dp"
+            android:text="Pressure:"
+            android:textAlignment="textEnd"
+            android:textColor="#ffffff"
+            android:textSize="13sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/TFPressure" />
+
+        <TextView
+            android:id="@+id/textView11"
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="80dp"
+            android:text="Clouds:"
+            android:textAlignment="textEnd"
+            android:textColor="#ffffff"
+            android:textSize="13sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/TFClouds" />
+
+        <TextView
+            android:id="@+id/textView12"
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="80dp"
+            android:text="WindSpeed:"
+            android:textAlignment="textEnd"
+            android:textColor="#ffffff"
+            android:textSize="13sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/TFWindSpeed" />
+
+    </android.support.constraint.ConstraintLayout>
+
+
+</LinearLayout>

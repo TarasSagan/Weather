@@ -1,4 +1,4 @@
-package com.example.taras.weather.Fragments.CityFragment;
+package com.example.taras.weather.Fragments.SeveralDayForecastFragment;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -10,9 +10,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.taras.weather.MainActivity;
 import com.example.taras.weather.repository.local.fiveDaysThreeHours.Repo;
+import com.example.taras.weather.DetailActivity;
 import com.example.taras.weather.R;
+
+
 
 /**
  * A fragment representing a list of Items.
@@ -20,8 +22,8 @@ import com.example.taras.weather.R;
  * Activities containing this fragment MUST implement the {@link OnListFragmentInteractionListener}
  * interface.
  */
-public class CityFragment extends Fragment {
-    public static final String TAG = "CityFragment";
+public class SeveralDayForecastFragment extends Fragment {
+    public static final String TAG = "SeveralDayForecastFragment";
 
     // TODO: Customize parameter argument names
     private static final String ARG_COLUMN_COUNT = "column-count";
@@ -33,13 +35,13 @@ public class CityFragment extends Fragment {
      * Mandatory empty constructor for the fragment manager to instantiate the
      * fragment (e.g. upon screen orientation changes).
      */
-    public CityFragment() {
+    public SeveralDayForecastFragment() {
     }
 
     // TODO: Customize parameter initialization
     @SuppressWarnings("unused")
-    public static CityFragment newInstance(int columnCount) {
-        CityFragment fragment = new CityFragment();
+    public static SeveralDayForecastFragment newInstance(int columnCount) {
+        SeveralDayForecastFragment fragment = new SeveralDayForecastFragment();
         Bundle args = new Bundle();
         args.putInt(ARG_COLUMN_COUNT, columnCount);
         fragment.setArguments(args);
@@ -58,7 +60,7 @@ public class CityFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_city_list, container, false);
+        View view = inflater.inflate(R.layout.several_days_fragment_list, container, false);
 
         // Set the adapter
         if (view instanceof RecyclerView) {
@@ -69,10 +71,9 @@ public class CityFragment extends Fragment {
             } else {
                 recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
             }
-            recyclerView.setAdapter(new MyCityRecyclerViewAdapter(MainActivity.getListTodayAllCityes(), mListener));
+            recyclerView.setAdapter(new MyItemRecyclerViewAdapter(DetailActivity.getListSeveralDays(), mListener));
         }
         return view;
-
     }
 
 

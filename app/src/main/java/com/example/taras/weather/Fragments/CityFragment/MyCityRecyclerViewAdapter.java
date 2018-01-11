@@ -6,23 +6,24 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.example.taras.weather.repository.local.fiveDaysThreeHours.Repo;
 import com.example.taras.weather.Fragments.CityFragment.CityFragment.OnListFragmentInteractionListener;
-import com.example.taras.weather.Fragments.CityFragment.dummy.DummyContent.DummyItem;
+
 import com.example.taras.weather.R;
 
 import java.util.List;
 
 /**
- * {@link RecyclerView.Adapter} that can display a {@link DummyItem} and makes a call to the
+ * {@link RecyclerView.Adapter} that can display a  and makes a call to the
  * specified {@link OnListFragmentInteractionListener}.
  * TODO: Replace the implementation with code for your data type.
  */
 public class MyCityRecyclerViewAdapter extends RecyclerView.Adapter<MyCityRecyclerViewAdapter.ViewHolder> {
 
-    private final List<DummyItem> mValues;
+    private final List<Repo> mValues;
     private final OnListFragmentInteractionListener mListener;
 
-    public MyCityRecyclerViewAdapter(List<DummyItem> items, OnListFragmentInteractionListener listener) {
+    public MyCityRecyclerViewAdapter(List<Repo> items, OnListFragmentInteractionListener listener) {
         mValues = items;
         mListener = listener;
     }
@@ -37,8 +38,9 @@ public class MyCityRecyclerViewAdapter extends RecyclerView.Adapter<MyCityRecycl
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
         holder.mItem = mValues.get(position);
-        holder.mIdView.setText(mValues.get(position).id);
-        holder.mContentView.setText(mValues.get(position).content);
+        holder.CFCityName.setText(mValues.get(position).getCityName());
+        holder.CFDescription.setText(mValues.get(position).getDescription());
+        holder.CFTemperature.setText(Double.toString(mValues.get(position).getTemperature()));
 
         holder.mView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -59,20 +61,18 @@ public class MyCityRecyclerViewAdapter extends RecyclerView.Adapter<MyCityRecycl
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         public final View mView;
-        public final TextView mIdView;
-        public final TextView mContentView;
-        public DummyItem mItem;
+        public final TextView CFCityName;
+        public final TextView CFDescription;
+        public final TextView CFTemperature;
+        public Repo mItem;
 
         public ViewHolder(View view) {
             super(view);
             mView = view;
-            mIdView = (TextView) view.findViewById(R.id.id);
-            mContentView = (TextView) view.findViewById(R.id.content);
+            CFCityName = (TextView) view.findViewById(R.id.CFCityName);
+            CFDescription = (TextView) view.findViewById(R.id.CFDescription);
+            CFTemperature = (TextView) view.findViewById(R.id.CFTemperature);
         }
 
-        @Override
-        public String toString() {
-            return super.toString() + " '" + mContentView.getText() + "'";
-        }
     }
 }
