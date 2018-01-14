@@ -18,6 +18,7 @@ import com.example.taras.weather.repository.RepositoryUtils;
 import com.example.taras.weather.repository.local.LocalDataUtils;
 import com.example.taras.weather.repository.local.fiveDaysThreeHours.RepoDatabase;
 import com.example.taras.weather.repository.modelsForecast.FiveDayEveryThreeHourForecast.OWMResponse;
+import com.example.taras.weather.repository.remote.ForecastUpdate;
 import com.example.taras.weather.repository.remote.OpenWeatherMapAPI;
 import com.example.taras.weather.repository.local.fiveDaysThreeHours.Repo;
 import com.example.taras.weather.Fragments.CityFragment.CityFragment;
@@ -71,8 +72,9 @@ public class MainActivity extends AppCompatActivity
 
         repositoryController = new RepositoryController();
         repositoryController.registerCallback(this);
-        initCityFragmet();
-
+//        initCityFragment();
+//init();
+        start();
     }
 
 
@@ -98,16 +100,25 @@ public class MainActivity extends AppCompatActivity
         return super.onOptionsItemSelected(item);
     }
      void start(){
+        List<Integer> longs = new ArrayList<>();
+        longs.add(703448);
+        longs.add(707860);
+        longs.add(1270260);
+        longs.add(708546);
+        longs.add(1283710);
+
+         ForecastUpdate forecastUpdate = new ForecastUpdate(longs, getApplicationContext());
+         forecastUpdate.updateData();
 
 
     }
 
-    void initCityFragmet(){
-        repositoryController.getTodayForecastAllCities(this);
+    void initCityFragment(){
+        repositoryController.initController(this);
     }
 
     private void init() {
-        String API_key = "caf674814c89747f40b8870b3091b074";
+        String API_key = "6e104a1a0c242bb277980d2e9ecceeae";
         Retrofit retrofit = new Retrofit.Builder()
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .addConverterFactory(GsonConverterFactory.create())
@@ -120,8 +131,10 @@ public class MainActivity extends AppCompatActivity
                 .map(OWMResponse -> RepositoryUtils.oWMresponseToRepo(OWMResponse))
                 .subscribeOn(Schedulers.io())
                 .subscribe(repoList -> {
+                    Log.d("RESPONSE", "conected");
                     LocalDataUtils.updateFiveDayDB(getApplicationContext(), repoList);
-                    initCityFragmet();});
+                    initCityFragment();});
+
 
 //        .subscribe(ItemForecast ->
 //                        Controller.addUpdateData(getApplicationContext(), ItemForecast));
