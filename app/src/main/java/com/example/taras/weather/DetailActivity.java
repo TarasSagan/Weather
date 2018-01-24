@@ -6,8 +6,10 @@ import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.MenuItem;
 
+import com.example.taras.weather.repository.DetailRepoController;
 import com.example.taras.weather.repository.local.fiveDaysThreeHours.Repo;
 import com.example.taras.weather.Fragments.SeveralDayForecastFragment.SeveralDayForecastFragment;
 import com.example.taras.weather.Fragments.TodayForecastFragment.TodayForecastFragment;
@@ -21,12 +23,14 @@ import java.util.Map;
 
 
 public class DetailActivity extends AppCompatActivity implements TodayForecastFragment.OnListFragmentInteractionListener,
-        SeveralDayForecastFragment.OnListFragmentInteractionListener{
+        SeveralDayForecastFragment.OnListFragmentInteractionListener, DetailRepoController.DetailActivityCallback{
     private FragmentTransaction transaction;
     private FragmentManager manager;
     private TodayForecastFragment todayForecastFragment;
     private SeveralDayForecastFragment severalDayForecastFragment;
-    private static List<Repo> listSelectedCity = new ArrayList<>();
+    private DetailRepoController detailRepoController;
+    private static List<Repo> listToday = new ArrayList<>();
+    private static List<Repo> listSeveralDays = new ArrayList<>();
 
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
@@ -56,6 +60,14 @@ public class DetailActivity extends AppCompatActivity implements TodayForecastFr
         }
     };
 
+    public static List<Repo> getListToday() {
+        return listToday;
+    }
+
+    public static List<Repo> getListSeveralDays() {
+        return listSeveralDays;
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -68,56 +80,36 @@ public class DetailActivity extends AppCompatActivity implements TodayForecastFr
         severalDayForecastFragment = new SeveralDayForecastFragment();
         manager = getSupportFragmentManager();
 
-//        listSelectedCity = Controller.getForecastSelectedCity(getApplicationContext(),
-//                getIntent().getLongExtra("city_id", 00));
+        startInit();
 
+    }
+    private void startInit(){
+        detailRepoController = new DetailRepoController(getApplicationContext(), this);
+        detailRepoController.getForecastByCitySelect( getIntent().getLongExtra("city_id", 00));
+    }
+    private void continueInit(){
         transaction = manager.beginTransaction();
         if (manager.findFragmentByTag(TodayForecastFragment.TAG) == null) {
             transaction.replace(R.id.DetailActivityContainer, todayForecastFragment, TodayForecastFragment.TAG);
             transaction.commit();
         }
+    }
 
-    }
-    public synchronized static List<Repo> getListSeveralDays(){
-        Calendar newCalendar = new GregorianCalendar();
-        Map<Integer, Repo> map = new HashMap<>();
-        for(int i = 0; i < listSelectedCity.size(); i++ ){
-            newCalendar.setTimeInMillis(listSelectedCity.get(i).getForecastDate());
-            int newDay = newCalendar.get(Calendar.DAY_OF_YEAR);
-            if(map.containsKey(newDay)){
-                double newTemp = listSelectedCity.get(i).getTemperature();
-                double oldTemp = map.get(newDay).getTemperature();
-                if(newTemp > oldTemp){
-                    map.remove(newDay);
-                    map.put(newDay, listSelectedCity.get(i));
-                }
-            }else{
-                map.put(newDay, listSelectedCity.get(i));
-            }
-        }
-        List<Repo> list = new ArrayList<Repo>(map.values());
-//        list = Controller.sortByForecastDate(list);
-        return list;
-    }
-    public static List<Repo> getListToday(){
-        Calendar nowCalendar = new GregorianCalendar();
-        Calendar tempCalendar = new GregorianCalendar();
-
-        List<Repo> list = new ArrayList<>();
-        for (int i = 0; i < listSelectedCity.size(); i++){
-            tempCalendar.setTime(new Date(listSelectedCity.get(i).getForecastDate()));
-            if(nowCalendar.getTimeInMillis() <= tempCalendar.getTimeInMillis()){
-                if(nowCalendar.get(Calendar.DAY_OF_MONTH) == tempCalendar.get(Calendar.DAY_OF_MONTH)){
-                    list.add(listSelectedCity.get(i));
-                }
-            }
-        }
-//        list = Controller.sortByForecastDate(list);
-        return list;
-    }
 
     @Override
     public void onListFragmentInteraction(Repo item) {
 
+    }
+
+
+    @Override
+    public void callBackForecastSelectCity(List<Repo> todayList, List<Repo> severalDays) {
+
+        Log.d("todayList.size = " , Integer.toString(todayList.size()));
+        Log.d("severalDays.size = " , Integer.toString(severalDays.size()));
+        Log.d("TAG" , "TAAAAAAAAAAAAAAAAAAAAAAAGGGGGGGGGGGGG");
+        listToday = todayList;
+        listSeveralDays = severalDays;
+        continueInit();
     }
 }

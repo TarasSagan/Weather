@@ -1,5 +1,7 @@
 package com.example.taras.weather.repository.local;
 import android.content.Context;
+import android.util.Log;
+
 import com.example.taras.weather.repository.local.fiveDaysThreeHours.Repo;
 import com.example.taras.weather.repository.local.fiveDaysThreeHours.RepoDatabase;
 

@@ -69,7 +69,7 @@ public class CityFragment extends Fragment {
             } else {
                 recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
             }
-            recyclerView.setAdapter(new MyCityRecyclerViewAdapter(MainActivity.getListTodayAllCityes(), mListener));
+            recyclerView.setAdapter(new MyCityRecyclerViewAdapter(MainActivity.getListTodayAllCities(), mListener));
         }
         return view;
 

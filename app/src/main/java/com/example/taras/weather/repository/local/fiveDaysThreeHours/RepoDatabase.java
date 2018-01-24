@@ -7,9 +7,7 @@ import android.content.Context;
 
 
 
-/**
- * Created by Taras on 23.11.2017.
- */
+
 @Database(entities = {Repo.class}, version = 1)
 public abstract class RepoDatabase extends RoomDatabase {
     private static final String DB_NAME = "repoDatabase.db";

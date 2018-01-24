@@ -11,17 +11,18 @@ import java.util.List;
 
 import io.reactivex.Flowable;
 import io.reactivex.Maybe;
+import io.reactivex.Single;
 
-/**
- * Created by Taras on 03.12.2017.
- */
 @Dao
 public interface RepoDAO {
     @Query("SELECT * FROM repo")
-    Flowable<List<Repo>> getAll();
+    Single<List<Repo>> getAll();
 
     @Query("SELECT * FROM repo WHERE cityID = :cityID")
     List<Repo> getAllByCityId(long cityID);
+
+    @Query("SELECT * FROM repo WHERE cityID = :cityID and forecastDate >=:forecastDate")
+    Single<List<Repo>> getAllByCityId(long cityID, long forecastDate);
 
 //    @Query("SELECT * FROM repo WHERE first_name LIKE :first AND "
 //            + "last_name LIKE :last LIMIT 1")

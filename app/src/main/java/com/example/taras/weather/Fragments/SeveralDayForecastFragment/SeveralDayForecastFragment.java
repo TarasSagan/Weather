@@ -14,6 +14,7 @@ import com.example.taras.weather.repository.local.fiveDaysThreeHours.Repo;
 import com.example.taras.weather.DetailActivity;
 import com.example.taras.weather.R;
 
+import java.util.ArrayList;
 
 
 /**
