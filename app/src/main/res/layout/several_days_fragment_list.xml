@@ -8,5 +8,5 @@
     android:layout_height="match_parent"
     android:background="@color/colorBackground"
     app:layoutManager="LinearLayoutManager"
-    tools:context="com.example.taras.weather.Fragments.SeveralDayForecastFragment.SeveralDayForecastFragment"
+    tools:context="com.example.taras.weather.fragments.SeveralDayForecastFragment.SeveralDayForecastFragment"
     tools:listitem="@layout/several_days_fragment_item" />

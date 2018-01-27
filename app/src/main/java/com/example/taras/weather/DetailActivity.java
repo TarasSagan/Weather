@@ -11,15 +11,10 @@ import android.view.MenuItem;
 
 import com.example.taras.weather.repository.DetailRepoController;
 import com.example.taras.weather.repository.local.fiveDaysThreeHours.Repo;
-import com.example.taras.weather.Fragments.SeveralDayForecastFragment.SeveralDayForecastFragment;
-import com.example.taras.weather.Fragments.TodayForecastFragment.TodayForecastFragment;
+import com.example.taras.weather.fragments.SeveralDayForecastFragment.SeveralDayForecastFragment;
+import com.example.taras.weather.fragments.TodayForecastFragment.TodayForecastFragment;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.GregorianCalendar;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 
 public class DetailActivity extends AppCompatActivity implements TodayForecastFragment.OnListFragmentInteractionListener,

@@ -2,9 +2,8 @@ package com.example.taras.weather.repository;
 
 import android.util.Log;
 
-import com.example.taras.weather.ItemForecast;
 import com.example.taras.weather.repository.local.fiveDaysThreeHours.Repo;
-import com.example.taras.weather.repository.modelsForecast.FiveDayEveryThreeHourForecast.OWMResponse;
+import com.example.taras.weather.repository.modelsResponse.FiveDayEveryThreeHourForecast.OWMResponse;
 
 import java.util.ArrayList;
 import java.util.Calendar;

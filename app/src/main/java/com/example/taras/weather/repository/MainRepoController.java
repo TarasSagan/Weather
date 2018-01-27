@@ -5,7 +5,7 @@ import android.widget.Toast;
 
 import com.example.taras.weather.repository.local.fiveDaysThreeHours.Repo;
 import com.example.taras.weather.repository.local.fiveDaysThreeHours.RepoDatabase;
-import com.example.taras.weather.repository.remote.ForecastUpdate;
+import com.example.taras.weather.repository.api.ForecastUpdate;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;

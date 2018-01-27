@@ -3,10 +3,11 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/list"
-    android:name="com.example.taras.weather.Fragments.ForecastFragment.DayForecastFragment"
+    android:name="com.example.taras.weather.fragments.AddCityFragment.ListCitiesFragment.ListCitiesFragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorBackground"
+    android:layout_marginLeft="16dp"
+    android:layout_marginRight="16dp"
     app:layoutManager="LinearLayoutManager"
-    tools:context="com.example.taras.weather.fragments.TodayForecastFragment.TodayForecastFragment"
-    tools:listitem="@layout/fragment_today_forecast_item" />
+    tools:context="com.example.taras.weather.fragments.AddCityFragment.ListCitiesFragment.ListCitiesFragment"
+    tools:listitem="@layout/fragment_city2" />
