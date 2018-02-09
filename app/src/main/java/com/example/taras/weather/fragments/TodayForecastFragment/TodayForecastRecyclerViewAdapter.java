@@ -1,27 +1,27 @@
 package com.example.taras.weather.fragments.TodayForecastFragment;
 
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.taras.weather.CalendarMethods;
+import com.example.taras.weather.MainActivity;
 import com.example.taras.weather.repository.local.fiveDaysThreeHours.Repo;
 import com.example.taras.weather.R;
 
 import com.example.taras.weather.fragments.TodayForecastFragment.TodayForecastFragment.OnListFragmentInteractionListener;
+import com.example.taras.weather.settings.values.UnitsFormat;
+import com.example.taras.weather.settings.values.models.Unit;
 
 
 import java.util.List;
+import java.util.Map;
 
-/**
- * {@link RecyclerView.Adapter} that can display a and makes a call to the
- * specified {@link OnListFragmentInteractionListener}.
- * TODO: Replace the implementation with code for your data type.
- */
 public class TodayForecastRecyclerViewAdapter extends RecyclerView.Adapter<TodayForecastRecyclerViewAdapter.ViewHolder> {
-
+    private String UNIT;
     private final List<Repo> mValues;
     private final OnListFragmentInteractionListener mListener;
 
@@ -34,7 +34,18 @@ public class TodayForecastRecyclerViewAdapter extends RecyclerView.Adapter<Today
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.fragment_today_forecast_item, parent, false);
+        UNIT = getCurrentUnit();
         return new ViewHolder(view);
+    }
+    private String getCurrentUnit(){
+        Map<String, String> curentSettings = MainActivity.getSettingsController().getSettings();
+        UnitsFormat unitsFormat = new UnitsFormat();
+        List<Unit> list = unitsFormat.getListUnits();
+        for(Unit unit : list){
+            if(TextUtils.equals(curentSettings.get("units"), unit.getValue())){
+                return unit.getDescription();
+            }
+        }return "";
     }
 
     @Override
@@ -42,7 +53,7 @@ public class TodayForecastRecyclerViewAdapter extends RecyclerView.Adapter<Today
         holder.mItem = mValues.get(position);
         holder.tFCityname.setText(mValues.get(position).getCityName());
         holder.tFDescription.setText(mValues.get(position).getDescription());
-        holder.tFTemperature.setText(Double.toString(mValues.get(position).getTemperature()));
+        holder.tFTemperature.setText(Double.toString(mValues.get(position).getTemperature()) + UNIT);
         holder.tFHumidity.setText(Long.toString(mValues.get(position).getHumidity()) + " %");
         holder.tFPressure.setText(Double.toString(mValues.get(position).getPressure()) + " hPa");
         holder.tFWindSpeed.setText(Double.toString(mValues.get(position).getWindSpeed()) + " " + " meter/sec");

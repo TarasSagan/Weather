@@ -8,90 +8,90 @@ public class Main {
 
     @SerializedName("temp")
     @Expose
-    private double temp;
+    private Double temp;
     @SerializedName("temp_min")
     @Expose
-    private double tempMin;
+    private Double tempMin;
     @SerializedName("temp_max")
     @Expose
-    private double tempMax;
+    private Double tempMax;
     @SerializedName("pressure")
     @Expose
-    private double pressure;
+    private Double pressure;
     @SerializedName("sea_level")
     @Expose
-    private double seaLevel;
+    private Double seaLevel;
     @SerializedName("grnd_level")
     @Expose
-    private double grndLevel;
+    private Double grndLevel;
     @SerializedName("humidity")
     @Expose
-    private long humidity;
+    private Long humidity;
     @SerializedName("temp_kf")
     @Expose
-    private double tempKf;
+    private Double tempKf;
 
-    public double getTemp() {
+    public Double getTemp() {
         return temp;
     }
 
-    public void setTemp(double temp) {
+    public void setTemp(Double temp) {
         this.temp = temp;
     }
 
-    public double getTempMin() {
+    public Double getTempMin() {
         return tempMin;
     }
 
-    public void setTempMin(double tempMin) {
+    public void setTempMin(Double tempMin) {
         this.tempMin = tempMin;
     }
 
-    public double getTempMax() {
+    public Double getTempMax() {
         return tempMax;
     }
 
-    public void setTempMax(double tempMax) {
+    public void setTempMax(Double tempMax) {
         this.tempMax = tempMax;
     }
 
-    public double getPressure() {
+    public Double getPressure() {
         return pressure;
     }
 
-    public void setPressure(double pressure) {
+    public void setPressure(Double pressure) {
         this.pressure = pressure;
     }
 
-    public double getSeaLevel() {
+    public Double getSeaLevel() {
         return seaLevel;
     }
 
-    public void setSeaLevel(double seaLevel) {
+    public void setSeaLevel(Double seaLevel) {
         this.seaLevel = seaLevel;
     }
 
-    public double getGrndLevel() {
+    public Double getGrndLevel() {
         return grndLevel;
     }
 
-    public void setGrndLevel(double grndLevel) {
+    public void setGrndLevel(Double grndLevel) {
         this.grndLevel = grndLevel;
     }
 
-    public long getHumidity() {
+    public Long getHumidity() {
         return humidity;
     }
 
-    public void setHumidity(long humidity) {
+    public void setHumidity(Long humidity) {
         this.humidity = humidity;
     }
 
-    public double getTempKf() {
+    public Double getTempKf() {
         return tempKf;
     }
 
-    public void setTempKf(double tempKf) {
+    public void setTempKf(Double tempKf) {
         this.tempKf = tempKf;
     }
 

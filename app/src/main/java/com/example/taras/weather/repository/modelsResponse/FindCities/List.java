@@ -8,7 +8,7 @@ public class List {
 
     @SerializedName("id")
     @Expose
-    private long id;
+    private Long id;
     @SerializedName("name")
     @Expose
     private String name;
@@ -20,7 +20,7 @@ public class List {
     private Main main;
     @SerializedName("dt")
     @Expose
-    private long dt;
+    private Long dt;
     @SerializedName("wind")
     @Expose
     private Wind wind;
@@ -40,11 +40,11 @@ public class List {
     @Expose
     private java.util.List<Weather> weather = null;
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -72,11 +72,11 @@ public class List {
         this.main = main;
     }
 
-    public long getDt() {
+    public Long getDt() {
         return dt;
     }
 
-    public void setDt(long dt) {
+    public void setDt(Long dt) {
         this.dt = dt;
     }
 

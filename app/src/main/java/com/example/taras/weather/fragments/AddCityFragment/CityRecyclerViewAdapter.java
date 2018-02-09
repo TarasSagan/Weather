@@ -1,4 +1,4 @@
-package com.example.taras.weather.fragments.CityFragment;
+package com.example.taras.weather.fragments.AddCityFragment;
 
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
@@ -9,8 +9,6 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.taras.weather.MainActivity;
-import com.example.taras.weather.repository.local.fiveDaysThreeHours.Repo;
-import com.example.taras.weather.fragments.CityFragment.CityFragment.OnListFragmentInteractionListener;
 import com.example.taras.weather.R;
 import com.example.taras.weather.settings.values.UnitsFormat;
 import com.example.taras.weather.settings.values.models.Unit;
@@ -18,20 +16,22 @@ import com.example.taras.weather.settings.values.models.Unit;
 import java.util.List;
 import java.util.Map;
 
-public class MyCityRecyclerViewAdapter extends RecyclerView.Adapter<MyCityRecyclerViewAdapter.ViewHolder> {
-    private String UNIT;
-    private final List<Repo> mValues;
-    private final OnListFragmentInteractionListener mListener;
 
-    public MyCityRecyclerViewAdapter(List<Repo> items, OnListFragmentInteractionListener listener) {
+public class CityRecyclerViewAdapter extends RecyclerView.Adapter<CityRecyclerViewAdapter.ViewHolder> {
+    private String UNIT;
+    private  List<ModelCitySearch> mValues;
+    private final AddCityFragment.AddCityListListener mListener;
+
+    public CityRecyclerViewAdapter(List<ModelCitySearch>  items, AddCityFragment.AddCityListListener listener) {
         mValues = items;
         mListener = listener;
+
     }
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.fragment_city, parent, false);
+                .inflate(R.layout.fragment_add_city_item, parent, false);
         UNIT = getCurrentUnit();
         return new ViewHolder(view);
     }
@@ -49,18 +49,18 @@ public class MyCityRecyclerViewAdapter extends RecyclerView.Adapter<MyCityRecycl
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
         holder.mItem = mValues.get(position);
-        holder.CFCityName.setText(mValues.get(position).getCityName());
-        holder.CFDescription.setText(mValues.get(position).getDescription());
-        holder.CFTemperature.setText(Double.toString(mValues.get(position).getTemperature()) + UNIT);
+        holder.tvAddCityName.setText(mValues.get(position).getCityName());
+        holder.tvAddCityCountry.setText(mValues.get(position).getCityCountry());
+        holder.tvAddCityTemp.setText(Double.toString(mValues.get(position).getTemp()) + UNIT);
+        holder.tvAddCityDescription.setText(mValues.get(position).getDescription());
 
-        holder.CFDelete.setOnClickListener(v -> mListener.onDeleteCallbackCityFragment(holder.mItem));
-        holder.mView.setOnClickListener(new View.OnClickListener() {
+        holder.tvAddCityButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (null != mListener) {
                     // Notify the active callbacks interface (the activity, if the
                     // fragment is attached to one) that an item has been selected.
-                    mListener.onClickCallbackCityFragment(holder.mItem);
+                    mListener.addCityCallback(holder.mItem);
                 }
             }
         });
@@ -73,20 +73,21 @@ public class MyCityRecyclerViewAdapter extends RecyclerView.Adapter<MyCityRecycl
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         public final View mView;
-        public final TextView CFCityName;
-        public final TextView CFDescription;
-        public final TextView CFTemperature;
-        public final Button CFDelete;
-        public Repo mItem;
+        public final TextView tvAddCityTemp;
+        public final TextView tvAddCityName;
+        public final TextView tvAddCityCountry;
+        public final TextView tvAddCityDescription;
+        public final Button tvAddCityButton;
+        public ModelCitySearch mItem;
 
         public ViewHolder(View view) {
             super(view);
             mView = view;
-            CFDelete = (Button) view.findViewById(R.id.buttonDelete);
-            CFCityName = (TextView) view.findViewById(R.id.CFCityName);
-            CFDescription = (TextView) view.findViewById(R.id.CFDescription);
-            CFTemperature = (TextView) view.findViewById(R.id.CFTemperature);
+            tvAddCityTemp = (TextView) view.findViewById(R.id.tvAddCityTemp);
+            tvAddCityName = (TextView) view.findViewById(R.id.tvAddCityName);
+            tvAddCityCountry = (TextView) view.findViewById(R.id.tvAddCityCountry);
+            tvAddCityDescription = (TextView) view.findViewById(R.id.tvAddCityDescription);
+            tvAddCityButton = (Button) view.findViewById(R.id.tvAddCityButton);
         }
-
     }
 }

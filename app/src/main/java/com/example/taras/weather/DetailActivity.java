@@ -66,6 +66,12 @@ public class DetailActivity extends AppCompatActivity implements TodayForecastFr
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        try
+        {
+            this.getSupportActionBar().hide();
+        }
+        catch (NullPointerException e){}
+
         setContentView(R.layout.activity_detail);
 
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
@@ -99,10 +105,6 @@ public class DetailActivity extends AppCompatActivity implements TodayForecastFr
 
     @Override
     public void callBackForecastSelectCity(List<Repo> todayList, List<Repo> severalDays) {
-
-        Log.d("todayList.size = " , Integer.toString(todayList.size()));
-        Log.d("severalDays.size = " , Integer.toString(severalDays.size()));
-        Log.d("TAG" , "TAAAAAAAAAAAAAAAAAAAAAAAGGGGGGGGGGGGG");
         listToday = todayList;
         listSeveralDays = severalDays;
         continueInit();

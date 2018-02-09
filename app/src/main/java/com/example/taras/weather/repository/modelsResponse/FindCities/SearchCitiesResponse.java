@@ -4,7 +4,7 @@ package com.example.taras.weather.repository.modelsResponse.FindCities;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class FindCitiesResponse {
+public class SearchCitiesResponse {
 
     @SerializedName("message")
     @Expose
@@ -14,10 +14,10 @@ public class FindCitiesResponse {
     private String cod;
     @SerializedName("count")
     @Expose
-    private long count;
+    private Long count;
     @SerializedName("list")
     @Expose
-    private java.util.List<com.example.taras.weather.repository.modelsResponse.FindCities.List> list = null;
+    private java.util.List<List> list = null;
 
     public String getMessage() {
         return message;
@@ -35,19 +35,19 @@ public class FindCitiesResponse {
         this.cod = cod;
     }
 
-    public long getCount() {
+    public Long getCount() {
         return count;
     }
 
-    public void setCount(long count) {
+    public void setCount(Long count) {
         this.count = count;
     }
 
-    public java.util.List<com.example.taras.weather.repository.modelsResponse.FindCities.List> getList() {
+    public java.util.List<List> getList() {
         return list;
     }
 
-    public void setList(java.util.List<com.example.taras.weather.repository.modelsResponse.FindCities.List> list) {
+    public void setList(java.util.List<List> list) {
         this.list = list;
     }
 

@@ -1,8 +1,6 @@
 
 package com.example.taras.weather.repository.modelsResponse.FiveDayEveryThreeHourForecast;
 
-import android.arch.persistence.room.PrimaryKey;
-
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
@@ -10,8 +8,7 @@ public class City {
 
     @SerializedName("id")
     @Expose
-    @PrimaryKey
-    private long id;
+    private Long id;
     @SerializedName("name")
     @Expose
     private String name;
@@ -22,11 +19,11 @@ public class City {
     @Expose
     private String country;
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

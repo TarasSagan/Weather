@@ -1,11 +1,9 @@
 
 package com.example.taras.weather.repository.modelsResponse.FiveDayEveryThreeHourForecast;
 
-import android.arch.persistence.room.Entity;
-
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
-@Entity
+
 public class OWMResponse {
 
     @SerializedName("cod")
@@ -13,10 +11,10 @@ public class OWMResponse {
     private String cod;
     @SerializedName("message")
     @Expose
-    private double message;
+    private Double message;
     @SerializedName("cnt")
     @Expose
-    private long cnt;
+    private Long cnt;
     @SerializedName("list")
     @Expose
     private java.util.List<List> list = null;
@@ -32,19 +30,19 @@ public class OWMResponse {
         this.cod = cod;
     }
 
-    public double getMessage() {
+    public Double getMessage() {
         return message;
     }
 
-    public void setMessage(double message) {
+    public void setMessage(Double message) {
         this.message = message;
     }
 
-    public long getCnt() {
+    public Long getCnt() {
         return cnt;
     }
 
-    public void setCnt(long cnt) {
+    public void setCnt(Long cnt) {
         this.cnt = cnt;
     }
 

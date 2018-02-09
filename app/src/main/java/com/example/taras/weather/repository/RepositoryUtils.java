@@ -16,6 +16,36 @@ import java.util.List;
 import java.util.Map;
 
 public class RepositoryUtils {
+    public List<Long> checkForUpdt(List<Repo> repoForUpdt, Long UPDATE_INTERVAL){
+        Calendar calendar = new GregorianCalendar();
+        Map<Long, Repo> itemsMap = new HashMap<>();
+        List<Repo> list;
+        List<Long> listCities = new ArrayList<>();
+        long hoursAgoTime = calendar.getTimeInMillis() - UPDATE_INTERVAL;
+        for (int i = 0; i < repoForUpdt.size(); i++) {
+            long timeInRepo = repoForUpdt.get(i).getLastUpdate();
+            if (timeInRepo < hoursAgoTime) {
+                if (!itemsMap.containsKey(repoForUpdt.get(i).getCityID())){
+                    itemsMap.put(repoForUpdt.get(i).getCityID(), repoForUpdt.get(i));
+                }
+            }
+        }
+        list = new ArrayList<>(itemsMap.values());
+        for (Repo repo : list){
+            listCities.add(repo.getCityID());
+        }
+        return listCities;
+    }
+
+    public synchronized  List<Long> createListToForceUpdt(List<Repo> list){
+        Map<Long, Long> map = new HashMap<>();
+        for(Repo city : list){
+            if (!map.containsKey(city.getCityID())){
+                map.put(city.getCityID(), city.getCityID());
+            }
+        }
+        return new ArrayList<>(map.values());
+    }
 
     public synchronized static List<Repo> oWMresponseToRepo(OWMResponse owmResponse){
         Date date = new Date();

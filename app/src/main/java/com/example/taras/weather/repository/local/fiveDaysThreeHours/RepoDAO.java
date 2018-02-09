@@ -2,6 +2,7 @@ package com.example.taras.weather.repository.local.fiveDaysThreeHours;
 
 import android.arch.persistence.room.Dao;
 import android.arch.persistence.room.Delete;
+import android.arch.persistence.room.Ignore;
 import android.arch.persistence.room.Insert;
 import android.arch.persistence.room.Query;
 import android.arch.persistence.room.Update;
@@ -31,19 +32,15 @@ public interface RepoDAO {
 //    @Query("SELECT * FROM repo where uid = :id")
 //    Maybe<Repo> findById(int id);
 
-
-    @Insert
-    void insertAll(Repo... repos);
-
     @Insert
     void insert(List<Repo> list);
 
-    @Delete
-    void delete(Repo repo);
+    @Query("DELETE FROM repo WHERE cityID = :cityID")
+    void delete(long cityID);
 
     @Delete
     void delete(List<Repo> list);
 
     @Update
-    public void updateRepo(Repo... repos);
+    void updateRepo(Repo... repos);
 }

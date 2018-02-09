@@ -8,7 +8,7 @@ public class List {
 
     @SerializedName("dt")
     @Expose
-    private long dt;
+    private Long dt;
     @SerializedName("main")
     @Expose
     private Main main;
@@ -31,11 +31,11 @@ public class List {
     @Expose
     private String dtTxt;
 
-    public long getDt() {
+    public Long getDt() {
         return dt;
     }
 
-    public void setDt(long dt) {
+    public void setDt(Long dt) {
         this.dt = dt;
     }
 

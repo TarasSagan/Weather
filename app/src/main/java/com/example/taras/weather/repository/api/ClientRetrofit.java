@@ -4,11 +4,7 @@ import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-/**
- * Created by Taras on 14.12.2017.
- */
-
-public class ClientRetofit {
+public class ClientRetrofit {
     private OpenWeatherMapAPI openWeatherMapAPI;
     public OpenWeatherMapAPI getClient(){
         if(openWeatherMapAPI == null) {
