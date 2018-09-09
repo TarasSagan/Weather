@@ -7,6 +7,5 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorBackground"
-    app:layoutManager="LinearLayoutManager"
     tools:context="com.example.taras.weather.fragments.TodayForecastFragment.TodayForecastFragment"
     tools:listitem="@layout/fragment_today_forecast_item" />

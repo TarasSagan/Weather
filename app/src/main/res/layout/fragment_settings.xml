@@ -129,7 +129,6 @@
             android:layout_height="match_parent"
             android:layout_gravity="right|center"
             android:layout_weight="1"
-            app:layoutManager="LinearLayoutManager"
             tools:context="com.example.taras.weather.fragments.SettingsFragment.SettingsFragment"
             tools:listitem="@layout/fragment_settings_item">
 
