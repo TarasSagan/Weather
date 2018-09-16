@@ -1,0 +1,21 @@
+apply plugin: 'kotlin'
+
+sourceCompatibility = "8"
+targetCompatibility = "8"
+
+configurations.all {
+    resolutionStrategy {
+        force "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+    }
+}
+
+dependencies {
+    def presentationDependencies = rootProject.ext.presentationDependencies
+    implementation project(':domain')
+
+    implementation presentationDependencies.kotlin
+    implementation presentationDependencies.rxKotlin
+    implementation presentationDependencies.dagger
+}
+
+
